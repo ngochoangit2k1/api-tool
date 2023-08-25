@@ -1,7 +1,7 @@
 import axios from "axios";
-import dotenv from "dotenv";
+// import dotenv from "dotenv";
 
-dotenv.config();
+// dotenv.config();
 
 const apiUrl = "https://api-v3.baontq.xyz/v3/auth/login";
 const apiUrl2 = "https://api-v3.baontq.xyz/v3/package/undefined/asc?q=";
@@ -12,7 +12,7 @@ export default async function data(req, res, next) {
       email: process.env.EMAIL,
       password: process.env.PASSWORD,
     };
-
+    console.log(loginData)
     const response = await axios.post(apiUrl, loginData);
     const token = response.data;
     const tokenParts = token.split(".");

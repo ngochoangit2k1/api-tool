@@ -1,7 +1,7 @@
 import axios from "axios";
-import dotenv from "dotenv";
+// import dotenv from "dotenv";
 
-dotenv.config();
+// dotenv.config();
 
 const apiUrl = "https://api-v3.baontq.xyz/v3/auth/login";
 const apiUrl2 = "https://api-v3.baontq.xyz/v3/key/1136/1/10/id/desc";
