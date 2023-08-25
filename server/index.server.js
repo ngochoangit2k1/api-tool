@@ -13,7 +13,7 @@ export default async function data(req, res, next) {
     };
 
     const response = await axios.post(apiUrl, loginData);
-    console.log(response);
+    console.log( "response",response);
     const token = response.data;
     const tokenParts = token.split(".");
     const payload = JSON.parse(base64UrlDecode(tokenParts[1]));
