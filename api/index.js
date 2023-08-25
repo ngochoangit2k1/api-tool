@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors"); // Import module cors
-const data = require("./server/index.server");
-const key = require("./server/key.server");
+const data = require("../server/index.server");
+const key = require("../server/key.server");
 const app = express();
 
 // app.use(cors({
