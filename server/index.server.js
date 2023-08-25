@@ -1,12 +1,12 @@
-const axios = require("axios");
-const dotenv = require("dotenv");
+import axios from "axios";
+import dotenv from "dotenv";
 
 dotenv.config();
 
 const apiUrl = "https://api-v3.baontq.xyz/v3/auth/login";
 const apiUrl2 = "https://api-v3.baontq.xyz/v3/package/undefined/asc?q=";
 
-async function data(req, res, next) {
+export default async function data(req, res, next) {
   try {
     const loginData = {
       email: process.env.EMAIL,
@@ -48,4 +48,4 @@ function base64UrlDecode(str) {
   return buffer.toString("utf-8");
 }
 
-module.exports = data;
+
