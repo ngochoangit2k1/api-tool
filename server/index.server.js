@@ -26,7 +26,7 @@ export default async function data(req, res, next) {
 
     const accessToken = token;
     const headers = {
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: 'Bearer ' + accessToken,
     };
 
     const response2 = await axios.get(apiUrl2, { headers });
