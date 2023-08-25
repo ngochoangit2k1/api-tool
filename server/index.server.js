@@ -3,18 +3,17 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const apiUrl = "https://api-v3.baontq.xyz/v3/auth/login";
-const apiUrl2 = "https://api-v3.baontq.xyz/v3/package/undefined/asc?q=";
-
 export default async function data(req, res, next) {
   try {
+    const apiUrl = "https://api-v3.baontq.xyz/v3/auth/login";
+    const apiUrl2 = "https://api-v3.baontq.xyz/v3/package/undefined/asc?q=";
     const loginData = {
       email: process.env.EMAIL,
       password: process.env.PASSWORD,
     };
- 
+
     const response = await axios.post(apiUrl, loginData);
-    console.log(response)
+    console.log(response);
     const token = response.data;
     const tokenParts = token.split(".");
     const payload = JSON.parse(base64UrlDecode(tokenParts[1]));
@@ -27,12 +26,12 @@ export default async function data(req, res, next) {
 
     const accessToken = token;
     const headers = {
-      Authorization: `Bearer ${accessToken}`, 
+      Authorization: `Bearer ${accessToken}`,
     };
 
     const response2 = await axios.get(apiUrl2, { headers });
     const newToken = response2.data.data[0].token;
-    console.log(newToken)
+    console.log(newToken);
     return res.status(200).send(newToken);
   } catch (error) {
     console.error("Lỗi:", error.message);
@@ -48,5 +47,3 @@ function base64UrlDecode(str) {
   const buffer = Buffer.from(base64, "base64");
   return buffer.toString("utf-8");
 }
-
-
