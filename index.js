@@ -12,7 +12,7 @@ app.get("/", (req, res) => {
   return data(req, res);
 });
 app.get("/key", (req, res) => {
-  return key(req, res);
+  return key(req, res); 
 });
 // Các cấu hình và định nghĩa routes khác
 
