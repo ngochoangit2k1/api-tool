@@ -4,10 +4,12 @@ import data from "../server/index.server.js";
 import key from "../server/key.server.js"; 
 const app = express();
 
-app.use(cors({
-    origin: true,
-    credentials: true
-  })); // Sử dụng cors middleware
+app.use(cors(
+  // {
+  //   origin: true,
+  //   credentials: true
+  // }
+  )); // Sử dụng cors middleware
 app.get("/", (req, res) => {
   return data(req, res);
 });
