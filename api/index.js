@@ -3,7 +3,10 @@ import cors from "cors";// Import module cors
 import data from "../server/index.server.js";
 import key from "../server/key.server.js"; 
 const app = express();
+const headers = new Headers();
+headers.append("Accept", "application/json");
 
+headers.append('Accept-Encoding', 'gzip, deflate, br');
 app.use(cors(
   // {
   //   origin: true,
