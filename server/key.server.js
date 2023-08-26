@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const apiUrl = "https://api-v3.baontq.xyz/v3/auth/login";
+// const apiUrl = "https://api-v3.baontq.xyz/v3/auth/login";
 const apiUrl2 = "https://api-v3.baontq.xyz/v3/key/1136/1/10/id/desc";
 const apiUrl3 = "https://api-v3.baontq.xyz/v3/key";
 
@@ -14,7 +14,7 @@ export default async function key(req, res) {
       password: process.env.PASSWORD,
     };
 
-    const response = await axios.post(apiUrl, loginData);
+    const response = await axios.post(process.env.APIURL, loginData);
     const token = response.data;
     const tokenParts = token.split(".");
     const payload = JSON.parse(base64UrlDecode(tokenParts[1]));
@@ -30,7 +30,7 @@ export default async function key(req, res) {
       Authorization: `Bearer ${accessToken}`,
     };
 
-    const response2 = await axios.get(apiUrl2, { headers });
+    const response2 = await axios.get(process.env.URLKEY, { headers });
     const totalKeys = response2.data.meta.total;
 
     if (totalKeys > 9) {
@@ -39,7 +39,7 @@ export default async function key(req, res) {
         account_id: 1136,
         keyIds: [keyIdToDelete],
       };
-      await axios.delete(apiUrl3, { data: datax, headers });
+      await axios.delete(process.env.URLKEYMAIN, { data: datax, headers });
     } else {
       const crearedata = {
         account_id: 1136,
@@ -51,7 +51,7 @@ export default async function key(req, res) {
         key_activation_limit: 1,
         quantity: 1,
       };
-      await axios.post(apiUrl3, crearedata, { headers });
+      await axios.post(process.env.URLKEYMAIN, crearedata, { headers });
     }
 
     return res.status(200).send(response2.data.data[0].value);

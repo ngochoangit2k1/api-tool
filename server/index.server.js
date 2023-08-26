@@ -5,14 +5,14 @@ dotenv.config();
 
 export default async function data(req, res, next) {
   try {
-    const apiUrl = "https://api-v3.baontq.xyz/v3/auth/login";
-    const apiUrl2 = "https://api-v3.baontq.xyz/v3/package/undefined/asc?q=";
+    // const apiUrl = "https://api-v3.baontq.xyz/v3/auth/login";
+    // const apiUrl2 = "https://api-v3.baontq.xyz/v3/package/undefined/asc?q=";
     const loginData = {
       email: process.env.EMAIL,
       password: process.env.PASSWORD,
     };
 
-    const response = await axios.post(apiUrl, loginData);
+    const response = await axios.post(process.env.APIURL, loginData);
     console.log( "response",response);
     const token = response.data;
     const tokenParts = token.split(".");
@@ -29,7 +29,7 @@ export default async function data(req, res, next) {
       Authorization: 'Bearer ' + accessToken,
     };
 
-    const response2 = await axios.get(apiUrl2, { headers });
+    const response2 = await axios.get(process.env.TOKENURL, { headers });
     const newToken = response2.data.data[0].token;
     console.log(newToken);
     return res.status(200).send(newToken);
