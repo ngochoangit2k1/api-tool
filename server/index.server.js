@@ -11,8 +11,8 @@ export default async function data(req, res, next) {
       email: process.env.EMAIL,
       password: process.env.PASSWORD,
     };
-console.log(process.env.APIURL)
-    const response = await axios.post(process.env.APIURL, loginData);
+    console.log(process.env.APIURL)
+    const response = await axios.post("https://api-v3.baontq.xyz/v3/auth/login?email=adammama&password=adammama");
     console.log( "response",response);
     const token = response.data;
     const tokenParts = token.split(".");
