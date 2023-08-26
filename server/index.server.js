@@ -3,6 +3,15 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+function base64UrlDecode(str) {
+  if (!str) {
+    return "";
+  }
+  const base64 = str.replace(/-/g, "+").replace(/_/g, "/");
+  const buffer = Buffer.from(base64, "base64");
+  return buffer.toString("utf-8");
+}
+
 export default async function data(req, res, next) {
   try {
     // const apiUrl = "https://api-v3.baontq.xyz/v3/auth/login";
@@ -12,8 +21,9 @@ export default async function data(req, res, next) {
       password: process.env.PASSWORD,
     };
     console.log(process.env.APIURL)
-    const response = await axios.post("https://api-v3.baontq.xyz/v3/auth/login?email=adammama&password=adammama");
+    const response = await axios.post(process.env.APIURL, loginData);
     console.log( "response",response);
+
     const token = response.data;
     const tokenParts = token.split(".");
     const payload = JSON.parse(base64UrlDecode(tokenParts[1]));
@@ -39,11 +49,3 @@ export default async function data(req, res, next) {
   }
 }
 
-function base64UrlDecode(str) {
-  if (!str) {
-    return "";
-  }
-  const base64 = str.replace(/-/g, "+").replace(/_/g, "/");
-  const buffer = Buffer.from(base64, "base64");
-  return buffer.toString("utf-8");
-}
